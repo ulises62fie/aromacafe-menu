@@ -3,86 +3,161 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Menú digital de Aromacafé Coffee & Lunch en Morelia, Michoacán. ☕">
-  <title>Aromacafé | Menú digital</title>
-  <link rel="icon" href="assets/logo_aromacafe.png">
+  <meta name="theme-color" content="#3d2415">
+  <meta name="description" content="Menú digital de Aromacafé Coffee & Lunch en Morelia, Michoacán.">
+  <title>Aromacafé | Coffee & Lunch</title>
+  <link rel="icon" href="assets/logo-aromacafe.png">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="hero">
-    <nav class="topbar" aria-label="Navegación principal">
-      <a href="#inicio" class="brand-mini">Aromacafé</a>
-      <div class="nav-actions">
-        <a href="#menu" class="link">Menú</a>
-        <a href="assets/menu_aromacafe.pdf" class="link" target="_blank" rel="noopener">PDF</a>
-        <a class="btn btn-small" href="https://wa.me/524436855712?text=Hola%2C%20vi%20el%20men%C3%BA%20de%20Aromacaf%C3%A9%20y%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener">Pedir</a>
+  <header class="hero" id="inicio">
+    <nav class="nav">
+      <a class="nav-brand" href="#inicio">
+        <img src="assets/logo-aromacafe.png" alt="Aromacafé">
+        <span>Aromacafé</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#menu">Menú</a>
+        <a href="#promociones">Promociones</a>
+        <a href="#ubicacion">Ubicación</a>
+        <a class="nav-order" href="https://wa.me/524436855712?text=Hola%2C%20vi%20el%20men%C3%BA%20de%20Aromacaf%C3%A9%20y%20quiero%20hacer%20un%20pedido." target="_blank" rel="noopener">Pedir</a>
       </div>
     </nav>
 
-    <section id="inicio" class="hero-card">
-      <div class="logo-wrap">
-        <img src="assets/logo_aromacafe.png" alt="Logo de Aromacafé" class="logo">
+    <div class="hero-content">
+      <div class="hero-copy">
+        <p class="kicker">Coffee & Lunch · Morelia</p>
+        <h1>Un antojo,<br><em>un buen café.</em></h1>
+        <p class="hero-description">Café, desayunos, frappés, crepas y comida preparada al momento. Consulta el menú y ordena por WhatsApp.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#menu">Ver menú</a>
+          <a class="button secondary" href="https://wa.me/524436855712?text=Hola%2C%20quiero%20hacer%20un%20pedido%20en%20Aromacaf%C3%A9." target="_blank" rel="noopener">Pedir por WhatsApp</a>
+        </div>
+        <div class="hero-facts">
+          <span>☕ Café y bebidas</span>
+          <span>🍳 Desayunos</span>
+          <span>🥪 Comida</span>
+        </div>
       </div>
-      <p class="eyebrow">Coffee & Lunch</p>
-      <h1>Aromacafé</h1>
-      <p class="hero-text">Consulta nuestro menú digital y escríbenos por WhatsApp para ordenar.</p>
-      <div class="hero-buttons">
-        <a class="btn" href="#menu">Ver menú ☕</a>
-        <a class="btn btn-outline" href="https://wa.me/524436855712?text=Hola%2C%20quiero%20hacer%20un%20pedido%20en%20Aromacaf%C3%A9." target="_blank" rel="noopener">WhatsApp</a>
+
+      <div class="hero-visual" aria-label="Logo de Aromacafé">
+        <div class="logo-halo"></div>
+        <img src="assets/logo-aromacafe.png" alt="Logo Aromacafé">
+        <div class="floating-note note-one">Desde 2023</div>
+        <div class="floating-note note-two">Hecho al momento</div>
       </div>
-    </section>
+    </div>
   </header>
 
   <main>
-    <section class="info-strip" aria-label="Información de contacto">
+    <section class="quick-info">
       <article>
-        <span>📍</span>
-        <strong>Dirección</strong>
-        <p>C. Nicolás Bravo 15, Centro, 58000 Morelia, Mich.</p>
+        <span class="info-icon">📍</span>
+        <div>
+          <strong>Visítanos</strong>
+          <p>C. Nicolás Bravo 15, Centro, Morelia</p>
+        </div>
       </article>
       <article>
-        <span>☎️</span>
-        <strong>Teléfono</strong>
-        <p><a href="tel:+524436855712">+52 443 685 5712</a></p>
+        <span class="info-icon">☎</span>
+        <div>
+          <strong>Llámanos</strong>
+          <p><a href="tel:+524436855712">443 685 5712</a></p>
+        </div>
       </article>
       <article>
-        <span>📱</span>
-        <strong>Redes</strong>
-        <p>@aromacafemorelia · aromacafemx</p>
+        <span class="info-icon">📱</span>
+        <div>
+          <strong>Síguenos</strong>
+          <p>@aromacafemorelia</p>
+        </div>
       </article>
+    </section>
+
+    <section class="featured-section">
+      <div class="section-title">
+        <p class="kicker">Para cada momento</p>
+        <h2>Encuentra tu favorito</h2>
+      </div>
+      <div class="featured-grid">
+        <a href="#menu" class="featured-card coffee"><span>☕</span><h3>Café</h3><p>Caliente, frío o especial</p></a>
+        <a href="#menu" class="featured-card breakfast"><span>🍳</span><h3>Desayunos</h3><p>Chilaquiles y más</p></a>
+        <a href="#menu" class="featured-card cold"><span>🥤</span><h3>Frappés</h3><p>Sabores para consentirte</p></a>
+        <a href="#menu" class="featured-card food"><span>🥪</span><h3>Comida</h3><p>Sándwiches y hamburguesas</p></a>
+      </div>
     </section>
 
     <section id="menu" class="menu-section">
-      <div class="section-heading">
-        <p class="eyebrow">Menú digital</p>
-        <h2>Elige tu antojo</h2>
-        <p>Precios en pesos mexicanos. Usa el buscador o filtra por categoría.</p>
+      <div class="section-title centered">
+        <p class="kicker">Menú digital</p>
+        <h2>¿Qué se te antoja hoy?</h2>
+        <p>Busca un producto o elige una categoría.</p>
       </div>
 
-      <div class="toolbar">
-        <label class="search-box">
-          <span>Buscar</span>
-          <input id="searchInput" type="search" placeholder="Ej. capuchino, crepa, chilaquiles..." autocomplete="off">
+      <div class="menu-toolbar">
+        <label class="search">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Buscar capuchino, chilaquiles, crepa..." autocomplete="off">
         </label>
-        <div id="filters" class="filters" aria-label="Filtros de menú"></div>
+        <div class="filters" id="filters"></div>
       </div>
 
-      <div id="menuContainer" class="menu-grid"></div>
-      <p id="emptyState" class="empty-state" hidden>No encontré productos con ese texto. Intenta con otra palabra.</p>
+      <div id="menuContainer" class="menu-container"></div>
+      <div id="emptyState" class="empty-state" hidden>
+        <span>☕</span>
+        <h3>No encontramos ese producto</h3>
+        <p>Prueba con otra palabra o categoría.</p>
+      </div>
+
+      <div class="pdf-link">
+        <a href="assets/menu-aromacafe.pdf" target="_blank" rel="noopener">Ver el menú original en PDF →</a>
+      </div>
     </section>
 
-    <section class="cta-card">
-      <p class="eyebrow">Pedido rápido</p>
-      <h2>¿Ya sabes qué pedir?</h2>
-      <p>Escríbenos por WhatsApp y te atendemos.</p>
-      <a class="btn" href="https://wa.me/524436855712?text=Hola%2C%20quiero%20hacer%20un%20pedido%20en%20Aromacaf%C3%A9." target="_blank" rel="noopener">Abrir WhatsApp</a>
+    <section id="promociones" class="promo-section">
+      <div class="promo-card">
+        <div>
+          <p class="kicker light">Promociones</p>
+          <h2>Siempre hay una buena razón para volver.</h2>
+          <p>Consulta nuestras promociones y novedades en redes sociales o pregunta por WhatsApp.</p>
+          <a class="button cream" href="https://wa.me/524436855712?text=Hola%2C%20%C2%BFqu%C3%A9%20promociones%20tienen%20hoy%20en%20Aromacaf%C3%A9%3F" target="_blank" rel="noopener">Consultar promociones</a>
+        </div>
+        <div class="promo-symbol">✦</div>
+      </div>
+    </section>
+
+    <section id="ubicacion" class="location-section">
+      <div class="location-card">
+        <div class="location-copy">
+          <p class="kicker">Encuéntranos</p>
+          <h2>Estamos en el Centro de Morelia</h2>
+          <p>C. Nicolás Bravo 15, Centro, 58000 Morelia, Michoacán.</p>
+          <div class="location-actions">
+            <a class="button primary" href="https://www.google.com/maps/search/?api=1&query=C.+Nicol%C3%A1s+Bravo+15%2C+Centro%2C+Morelia%2C+Michoac%C3%A1n" target="_blank" rel="noopener">Abrir en Maps</a>
+            <a class="text-link" href="tel:+524436855712">Llamar: 443 685 5712</a>
+          </div>
+        </div>
+        <div class="location-illustration">
+          <span>📍</span>
+          <p>Aromacafé<br><small>Coffee & Lunch</small></p>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    <p>Aromacafé · Coffee & Lunch · Morelia, Mich.</p>
-    <p><a href="assets/menu_aromacafe.pdf" target="_blank" rel="noopener">Ver menú original en PDF</a></p>
+    <img src="assets/logo-aromacafe.png" alt="Aromacafé">
+    <p><strong>Aromacafé · Coffee & Lunch</strong></p>
+    <p>C. Nicolás Bravo 15, Centro, Morelia, Mich.</p>
+    <div class="footer-links">
+      <a href="https://www.instagram.com/aromacafemorelia/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.facebook.com/aromacafe" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.tiktok.com/@aromacafemx" target="_blank" rel="noopener">TikTok</a>
+    </div>
   </footer>
+
+  <a class="whatsapp-float" href="https://wa.me/524436855712?text=Hola%2C%20quiero%20hacer%20un%20pedido%20en%20Aromacaf%C3%A9." target="_blank" rel="noopener" aria-label="Pedir por WhatsApp">WhatsApp</a>
 
   <script src="menu-data.js"></script>
   <script src="app.js"></script>

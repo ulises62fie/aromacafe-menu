@@ -1,86 +1,84 @@
-const categories = [
-  { key: "todo", label: "Todo" },
-  { key: "bebidas", label: "Bebidas" },
-  { key: "comida", label: "Comida" },
-  { key: "postres", label: "Postres" },
-  { key: "desayunos", label: "Desayunos" },
-  { key: "combos" , label : "Combos" },
-];
-
-const filtersEl = document.getElementById("filters");
-const container = document.getElementById("menuContainer");
+const menuContainer = document.getElementById("menuContainer");
+const filters = document.getElementById("filters");
 const searchInput = document.getElementById("searchInput");
 const emptyState = document.getElementById("emptyState");
-let activeCategory = "todo";
+const menuToggle = document.getElementById("menuToggle");
+const navLinks = document.getElementById("navLinks");
+
+let activeCategory = "Todas";
 
 function normalize(text) {
-  return String(text || "")
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "");
+  return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
-function createFilters() {
-  filtersEl.innerHTML = "";
-  categories.forEach((cat) => {
-    const button = document.createElement("button");
-    button.className = "filter-btn" + (cat.key === activeCategory ? " active" : "");
-    button.textContent = cat.label;
-    button.type = "button";
+function buildFilters() {
+  const categories = ["Todas", ...Object.keys(window.MENU_DATA)];
+  filters.innerHTML = categories.map(category =>
+    `<button class="filter ${category === activeCategory ? "active" : ""}" data-category="${category}">${category}</button>`
+  ).join("");
+
+  filters.querySelectorAll(".filter").forEach(button => {
     button.addEventListener("click", () => {
-      activeCategory = cat.key;
-      createFilters();
+      activeCategory = button.dataset.category;
+      buildFilters();
       renderMenu();
     });
-    filtersEl.appendChild(button);
   });
-}
-
-function sectionMatches(section, query) {
-  if (activeCategory !== "todo" && section.category !== activeCategory) return false;
-  if (!query) return true;
-  const haystack = normalize([
-    section.title,
-    section.tag,
-    section.note,
-    ...section.items.flatMap((item) => [item.name, item.price, item.desc])
-  ].join(" "));
-  return haystack.includes(query);
 }
 
 function renderMenu() {
   const query = normalize(searchInput.value.trim());
-  const visibleSections = window.MENU_DATA.filter((section) => sectionMatches(section, query));
-  container.innerHTML = "";
+  let visibleCount = 0;
+  const output = [];
 
-  visibleSections.forEach((section) => {
-    const card = document.createElement("article");
-    card.className = "menu-card";
+  Object.entries(window.MENU_DATA).forEach(([category, products]) => {
+    if (activeCategory !== "Todas" && activeCategory !== category) return;
 
-    const itemsHtml = section.items.map((item) => `
-      <div class="item">
-        <div>
-          <span class="item-name">${item.name}</span>
-          ${item.desc ? `<span class="item-desc">${item.desc}</span>` : ""}
+    const matching = products.filter(([name, price, description]) =>
+      normalize(`${name} ${price} ${description} ${category}`).includes(query)
+    );
+
+    if (!matching.length) return;
+    visibleCount += matching.length;
+
+    output.push(`
+      <section class="category-block">
+        <div class="category-header">
+          <span>${window.MENU_ICONS[category] || "☕"}</span>
+          <h3>${category}</h3>
         </div>
-        <span class="price">${item.price}</span>
-      </div>
-    `).join("");
-
-    card.innerHTML = `
-      <header>
-        <h3>${section.title}</h3>
-        <span class="tag">${section.tag}</span>
-      </header>
-      <div class="items">${itemsHtml}</div>
-      ${section.note ? `<div class="note">${section.note}</div>` : ""}
-    `;
-    container.appendChild(card);
+        <div class="products-grid">
+          ${matching.map(([name, price, description]) => `
+            <article class="product">
+              <div>
+                <h4>${name}</h4>
+                ${description ? `<p>${description}</p>` : ""}
+              </div>
+              <div class="price">${price}</div>
+            </article>
+          `).join("")}
+        </div>
+      </section>
+    `);
   });
 
-  emptyState.hidden = visibleSections.length !== 0;
+  menuContainer.innerHTML = output.join("");
+  emptyState.hidden = visibleCount > 0;
 }
 
 searchInput.addEventListener("input", renderMenu);
-createFilters();
+
+menuToggle.addEventListener("click", () => {
+  const isOpen = navLinks.classList.toggle("open");
+  menuToggle.setAttribute("aria-expanded", String(isOpen));
+});
+
+navLinks.querySelectorAll("a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menuToggle.setAttribute("aria-expanded", "false");
+  });
+});
+
+buildFilters();
 renderMenu();
